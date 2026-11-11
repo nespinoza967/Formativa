@@ -1,0 +1,18 @@
+{% extends 'prestamos/base.html' %}
+
+{% block title %}{{ herramienta.nombre }}{% endblock %}
+
+{% block content %}
+<h1 class="h3 mb-3">{{ herramienta.nombre }}</h1>
+<table class="table w-auto">
+    <tr><th>Código</th><td>{{ herramienta.codigo }}</td></tr>
+    <tr><th>Nombre</th><td>{{ herramienta.nombre }}</td></tr>
+    <tr><th>Categoría</th><td>{{ herramienta.categoria }}</td></tr>
+    <tr><th>Estado</th><td>{{ herramienta.get_estado_display }}</td></tr>
+    <tr><th>Disponible</th><td>{{ herramienta.disponible|yesno:"Sí,No" }}</td></tr>
+    <tr><th>Fecha de ingreso</th><td>{{ herramienta.fecha_ingreso|date:"d-m-Y" }}</td></tr>
+</table>
+<a href="{% url 'herramienta_update' herramienta.pk %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'herramienta_delete' herramienta.pk %}" class="btn btn-danger">Eliminar</a>
+<a href="{% url 'herramienta_list' %}" class="btn btn-outline-secondary">Volver al listado</a>
+{% endblock %}

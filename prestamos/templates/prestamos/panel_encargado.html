@@ -5,4 +5,6 @@
 {% block content %}
 <h1>Panel del encargado</h1>
 <p>Esta página solo es visible para usuarios encargados (is_staff).</p>
+<a href="{% url 'herramienta_list' %}" class="btn btn-success">Gestionar herramientas</a>
+<a href="{% url 'categoria_list' %}" class="btn btn-outline-success">Gestionar categorías</a>
 {% endblock %}

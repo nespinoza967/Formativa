@@ -1,0 +1,13 @@
+{% extends 'prestamos/base.html' %}
+
+{% block title %}Confirmar eliminación{% endblock %}
+
+{% block content %}
+<h1 class="h3 mb-3">Confirmar eliminación</h1>
+<p>¿Seguro que quieres eliminar {{ tipo }} <strong>{{ objeto }}</strong>? Esta acción no se puede deshacer.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url cancelar_url %}" class="btn btn-outline-secondary">Cancelar</a>
+</form>
+{% endblock %}
