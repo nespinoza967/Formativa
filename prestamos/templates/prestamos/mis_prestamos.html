@@ -4,8 +4,9 @@
 
 {% block content %}
 <h1 class="h3 mb-3">Mis préstamos</h1>
+<div class="table-responsive">
 <table class="table table-striped align-middle">
-    <thead><tr><th>Herramienta</th><th>Solicitud</th><th>Devolución esperada</th><th>Devolución real</th><th>Estado</th></tr></thead>
+    <thead><tr><th>Herramienta</th><th>Solicitud</th><th>Devolución esperada</th><th>Devolución real</th><th>Estado</th><th></th></tr></thead>
     <tbody>
         {% for p in prestamos %}
         <tr>
@@ -14,10 +15,20 @@
             <td>{{ p.fecha_devolucion_esperada|date:"d-m-Y" }}</td>
             <td>{{ p.fecha_devolucion_real|date:"d-m-Y"|default:"—" }}</td>
             <td>{{ p.get_estado_display }}</td>
+            <td class="text-end">
+                {% if p.estado == 'PENDIENTE' %}
+                <form method="post" action="{% url 'cancelar_prestamo' p.pk %}" class="m-0"
+                      onsubmit="return confirm('¿Cancelar este préstamo?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
+                </form>
+                {% endif %}
+            </td>
         </tr>
         {% empty %}
-        <tr><td colspan="5" class="text-center text-muted">Aún no tienes préstamos.</td></tr>
+        <tr><td colspan="6" class="text-center text-muted">Aún no tienes préstamos.</td></tr>
         {% endfor %}
     </tbody>
 </table>
+</div>
 {% endblock %}

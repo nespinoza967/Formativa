@@ -20,6 +20,7 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'mis_prestamos' %}">Mis préstamos</a></li>
                 {% if user.is_staff %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'prestamo_list' %}">Todos los préstamos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'herramienta_list' %}">Herramientas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'categoria_list' %}">Categorías</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>

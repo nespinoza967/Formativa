@@ -28,4 +28,8 @@ urlpatterns = [
 
     # Préstamos
     path('mis-prestamos/', views.mis_prestamos, name='mis_prestamos'),
+    path('mis-prestamos/<int:pk>/cancelar/', views.cancelar_prestamo, name='cancelar_prestamo'),
+    path('prestamos/', views.prestamo_list, name='prestamo_list'),
+    path('prestamos/<int:pk>/activar/', views.activar_prestamo, name='activar_prestamo'),
+    path('prestamos/<int:pk>/devolver/', views.registrar_devolucion, name='registrar_devolucion'),
 ]
