@@ -1,0 +1,35 @@
+{% extends 'prestamos/base.html' %}
+
+{% block title %}Catálogo{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 m-0">Catálogo de herramientas</h1>
+    <a href="{% url 'ver_solicitud' %}" class="btn btn-outline-success">Ver mi solicitud ({{ solicitud_count }}/{{ max_solicitud }})</a>
+</div>
+<div class="row g-3">
+    {% for h in herramientas %}
+    <div class="col-sm-6 col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">{{ h.nombre }}</h2>
+                <p class="card-text text-muted mb-1">{{ h.codigo }} · {{ h.categoria }}</p>
+                <p class="card-text">Estado: {{ h.get_estado_display }}</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                {% if h.id in solicitud %}
+                <button class="btn btn-secondary w-100" disabled>Ya está en tu solicitud</button>
+                {% else %}
+                <form method="post" action="{% url 'agregar_solicitud' h.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">Agregar a solicitud</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">No hay herramientas disponibles en este momento.</p>
+    {% endfor %}
+</div>
+{% endblock %}

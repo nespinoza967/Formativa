@@ -1,0 +1,23 @@
+{% extends 'prestamos/base.html' %}
+
+{% block title %}Mis préstamos{% endblock %}
+
+{% block content %}
+<h1 class="h3 mb-3">Mis préstamos</h1>
+<table class="table table-striped align-middle">
+    <thead><tr><th>Herramienta</th><th>Solicitud</th><th>Devolución esperada</th><th>Devolución real</th><th>Estado</th></tr></thead>
+    <tbody>
+        {% for p in prestamos %}
+        <tr>
+            <td>{{ p.herramienta }}</td>
+            <td>{{ p.fecha_solicitud|date:"d-m-Y" }}</td>
+            <td>{{ p.fecha_devolucion_esperada|date:"d-m-Y" }}</td>
+            <td>{{ p.fecha_devolucion_real|date:"d-m-Y"|default:"—" }}</td>
+            <td>{{ p.get_estado_display }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center text-muted">Aún no tienes préstamos.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

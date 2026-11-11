@@ -1,0 +1,37 @@
+{% extends 'prestamos/base.html' %}
+
+{% block title %}Mi solicitud{% endblock %}
+
+{% block content %}
+<h1 class="h3 mb-3">Mi solicitud</h1>
+{% if herramientas %}
+<table class="table align-middle">
+    <thead><tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Estado</th><th></th></tr></thead>
+    <tbody>
+        {% for h in herramientas %}
+        <tr>
+            <td>{{ h.codigo }}</td>
+            <td>{{ h.nombre }}</td>
+            <td>{{ h.categoria }}</td>
+            <td>{{ h.get_estado_display }}</td>
+            <td class="text-end">
+                <form method="post" action="{% url 'quitar_solicitud' h.id %}" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Quitar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="text-muted">Al confirmar, cada herramienta queda como préstamo <strong>Pendiente</strong> con devolución esperada a 7 días.</p>
+<form method="post" action="{% url 'confirmar_solicitud' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Confirmar solicitud</button>
+    <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary">Seguir agregando</a>
+</form>
+{% else %}
+<p>Tu solicitud está vacía.</p>
+<a href="{% url 'catalogo' %}" class="btn btn-success">Ir al catálogo</a>
+{% endif %}
+{% endblock %}

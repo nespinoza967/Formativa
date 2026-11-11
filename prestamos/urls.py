@@ -18,4 +18,14 @@ urlpatterns = [
     path('categorias/nueva/', views.categoria_create, name='categoria_create'),
     path('categorias/<int:pk>/editar/', views.categoria_update, name='categoria_update'),
     path('categorias/<int:pk>/eliminar/', views.categoria_delete, name='categoria_delete'),
+
+    # Solicitud de préstamo (sesión)
+    path('catalogo/', views.catalogo, name='catalogo'),
+    path('solicitud/', views.ver_solicitud, name='ver_solicitud'),
+    path('solicitud/agregar/<int:id>/', views.agregar_solicitud, name='agregar_solicitud'),
+    path('solicitud/quitar/<int:id>/', views.quitar_solicitud, name='quitar_solicitud'),
+    path('solicitud/confirmar/', views.confirmar_solicitud, name='confirmar_solicitud'),
+
+    # Préstamos
+    path('mis-prestamos/', views.mis_prestamos, name='mis_prestamos'),
 ]
